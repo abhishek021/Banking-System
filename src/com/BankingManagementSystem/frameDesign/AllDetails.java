@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -77,22 +78,21 @@ class AllDetailsAccountant extends JFrame
 			super();
 			String heading[]={"NAME","ACCOUNTANT ID","SALARY"};
 			String data[][];
+			
 			//ArrayList<Registration> list;
 			try
 			{
-				list = AccountantDetailsFile.readDataFromFile();
+				//list = AccountantDetailsFile.readDataFromFile();
 				
 				data = new String[list.size()][3];
-				
+				//JOptionPane.showMessageDialog(null, list.get(0).getAccountantId());
 				int r=0;
-				for(AccountantDetails re : list)
-				{
-					data[r][0]=re.getAccountantName();
-					data[r][1]=re.getAccountantId();
-					data[r][2]=re.getSalary().toString();
+				
+					data[r][0]=list.get(0).getAccountantName();
+					data[r][1]=list.get(0).getAccountantId();
+					data[r][2]=""+list.get(0).getSalary();
 					
-					r++;
-				}
+				
 				
 				Container con=getContentPane();
 				con.setLayout(new BorderLayout());
@@ -100,7 +100,7 @@ class AllDetailsAccountant extends JFrame
 				JTable datatable=new JTable(data, heading);
 				JScrollPane jsp=new JScrollPane(datatable);
 				
-				con.add(new JLabel("All Customer Details"),BorderLayout.NORTH);
+				con.add(new JLabel("All Accountant Details"),BorderLayout.NORTH);
 				con.add(jsp,BorderLayout.CENTER);
 				
 				setSize(850, 300);
@@ -139,8 +139,8 @@ class AllDetailsTransaction extends JFrame
 				{
 					data[r][0]=re.getAccNo();
 					data[r][1]=re.getDateAndTime();
-					data[r][2]=re.getDeposite().toString();
-					data[r][3]=re.getWithdrawal().toString();
+					data[r][3]=re.getDeposite().toString();
+					data[r][2]=re.getWithdrawal().toString();
 					
 					r++;
 				}
@@ -183,11 +183,13 @@ class ShowCustomerDetails  extends JFrame{
 			//ArrayList<Registration> list;
 			try
 			{
-				list = CustomerDetailsFile.readDataFromFile();
+				//list = CustomerDetailsFile.readDataFromFile();
 				
 				data = new String[list.size()][7];
 				
 				int r=0;
+				//CustomerDetails re = new CustomerDetails();
+				//JOptionPane.showMessageDialog(null, "hey");
 				for(CustomerDetails re : list)
 				{
 					data[r][0]=re.getCname();
@@ -197,9 +199,9 @@ class ShowCustomerDetails  extends JFrame{
 					data[r][4]=re.getCfathername();
 					data[r][5]=re.getCdob();
 					data[r][6]=re.getBalance().toString();
-					
-					r++;
+				r++;
 				}
+				
 				
 				Container con=getContentPane();
 				con.setLayout(new BorderLayout());
@@ -207,7 +209,60 @@ class ShowCustomerDetails  extends JFrame{
 				JTable datatable=new JTable(data, heading);
 				JScrollPane jsp=new JScrollPane(datatable);
 				
-				con.add(new JLabel("All Customer Details"),BorderLayout.NORTH);
+				con.add(new JLabel("Customer Details"),BorderLayout.NORTH);
+				con.add(jsp,BorderLayout.CENTER);
+				
+				setSize(850, 300);
+				
+				setLocation(200, 200);
+				setVisible(true);
+			}catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
+			this.setVisible(true);
+	}
+}
+
+class PrintPassbook  extends JFrame{
+	
+
+
+	public PrintPassbook(ArrayList<TransactionSummary> list)
+	{
+		
+			super();
+			String heading[]={" Date and Time  " ," Debit " ," Credit "};
+			String data[][];
+			//ArrayList<Registration> list;
+			
+			try
+			{
+				//list = CustomerDetailsFile.readDataFromFile();
+				
+				data = new String[list.size()][3];
+				
+				int r=0;
+				//CustomerDetails re = new CustomerDetails();
+				//JOptionPane.showMessageDialog(null, "hey");
+				for(TransactionSummary re : list)
+				{
+					data[r][0]=re.getDateAndTime();
+					data[r][1]=re.getDeposite().toString();
+					data[r][2]=re.getWithdrawal().toString();
+					
+				r++;
+				}
+				
+				
+				Container con=getContentPane();
+				con.setLayout(new BorderLayout());
+				
+				JTable datatable=new JTable(data, heading);
+				JScrollPane jsp=new JScrollPane(datatable);
+				
+				con.add(new JLabel("Transaction history"),BorderLayout.NORTH);
 				con.add(jsp,BorderLayout.CENTER);
 				
 				setSize(850, 300);

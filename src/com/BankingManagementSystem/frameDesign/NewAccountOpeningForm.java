@@ -89,7 +89,7 @@ class AccountOpening extends JFrame
                             JFrame.DISPOSE_ON_CLOSE);
                     setVisible(false);
                     dispose();
-                    new AccountantFrame();
+                   // new AccountantFrame();
                 }
         }
         );
@@ -346,7 +346,7 @@ class AccountOpening extends JFrame
 			Csex="Female";
 		}
 		//Csex = "Male";
-		Cfname =txtFathersName.getText().trim();
+	    Cfname =txtFathersName.getText().trim();
 		Cmname = txtMothersName.getText().trim();
 		Cadd = txtAddress.getText().trim();
 		Cphone = txtPhone.getText().trim();

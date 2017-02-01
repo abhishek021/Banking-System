@@ -3,6 +3,8 @@ package com.BankingManagementSystem.frameDesign;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -30,37 +32,24 @@ public class CustomerInformationFrame extends JFrame
 	
 	ArrayList<CustomerDetails> userlist =new  ArrayList<CustomerDetails>();
 	ArrayList<CustomerDetails> userlisttemp =new  ArrayList<CustomerDetails>();
-	public CustomerInformationFrame()
+	public CustomerInformationFrame(int manageIndex)
 	{
-		formopen();
-	}
 	
-	
-	private void formopen()
-	{
 		//ManagerLoginPage obj=new ManagerLoginPage();
 		
 		setResizable(false);
 		setTitle("Customer Information");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		addWindowListener(new WindowAdapter() {
+	           public void windowClosing(WindowEvent e) {
+	            	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	            	setVisible(false);
+	            	dispose();
+	                   
+	                }
+	        }
+	        );
 		
-		/*
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                //int result = JOptionPane.showConfirmDialog(frame, "Are you sure?");
-               // if( result==JOptionPane.OK_OPTION){
-                    // NOW we change it to dispose on close..
-            	 	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            	 	setVisible(false);
-            	 	dispose();
-                	new Managerframe(obj.loginIndex);
-                	
-                }
-        }
-        );
-        */
 		setBounds(100, 100, 598, 457);
 		contentPane = new JPanel();
 		contentPane.setFont(new Font("Lucida Handwriting", Font.BOLD, 16));
@@ -136,7 +125,7 @@ public class CustomerInformationFrame extends JFrame
 		
 		setVisible(true);
 	}
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -147,6 +136,6 @@ public class CustomerInformationFrame extends JFrame
 				}
 			}
 		});
-}
+}*/
 }
 

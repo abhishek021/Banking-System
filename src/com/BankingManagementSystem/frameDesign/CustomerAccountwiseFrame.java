@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.BevelBorder;
 
 import com.BankingManagementSystem.FileHandling.CustomerDetailsFile;
@@ -23,6 +25,9 @@ public class CustomerAccountwiseFrame extends JFrame
 	private JButton bmanager;
 	private JFrame frame;
 	private  JPanel contentPane;
+	
+	ArrayList<CustomerDetails> userlist = new ArrayList<CustomerDetails>();
+	ArrayList<CustomerDetails> userlisttemp ;
 	
     public CustomerAccountwiseFrame()
     {
@@ -48,7 +53,7 @@ public class CustomerAccountwiseFrame extends JFrame
 	                            JFrame.DISPOSE_ON_CLOSE);
 	                    frame.setVisible(false);
 	                    frame.dispose();
-	                    new AccountantFrame();
+	                   // new AccountantFrame();
 	                }
 	        }
 	        );
@@ -110,10 +115,31 @@ public class CustomerAccountwiseFrame extends JFrame
 
     public void showDetails()
     {
-    	ArrayList<CustomerDetails> userlist = new ArrayList<CustomerDetails>();
-    	int index = Search.searchId(txtAcc.getText().trim());
-    	userlist = CustomerDetailsFile.readDataFromFile();
     	
+    	
+    	SwingUtilities.invokeLater(new Runnable()
+        {
+            public void run()
+            {
+            	
+            	
+            	int index = Search.searchId(txtAcc.getText().trim());
+            	
+            	userlist = CustomerDetailsFile.readDataFromFile();
+            	userlisttemp = new ArrayList<CustomerDetails>();
+            	userlisttemp.add(userlist.get(index));
+            	//JOptionPane.showInputDialog(this,userlist.size());
+            	//JOptionPane.showInputDialog(this,userlisttemp.size());
+            	 SwingUtilities.invokeLater(new Runnable()
+                 {
+                     public void run()
+                     {
+                         new ShowCustomerDetails(userlisttemp);
+               
+                     }
+                 });
+            }
+        });
     }
 	public static void main(String... args)
     {

@@ -135,7 +135,7 @@ public class TransferFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) 
 				{
-					
+					try{
 						int amt=Integer.parseInt(tAmount.getText().trim());
 						if(amt > 0)
 						{
@@ -153,7 +153,10 @@ public class TransferFrame {
 						else
 							JOptionPane.showMessageDialog(null, "Please enter a valid amount");
                     	
-				    }
+				    }catch (Exception y) {
+				    	JOptionPane.showMessageDialog(null, "Please enter a valid amount");
+					}
+				}
 					
 			   
 	        }
@@ -239,7 +242,7 @@ public class TransferFrame {
          }
          else
          {
-            JOptionPane.showInputDialog(tAmount, "Invalid Account number");
+            JOptionPane.showMessageDialog(tAmount, "Invalid Account number");
          }
 	 }
 

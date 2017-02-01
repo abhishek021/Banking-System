@@ -129,6 +129,7 @@ public class DepositeFrame extends JFrame
         
         bmanager.addActionListener((e)->
         {
+        	try{
         	int amt=Integer.parseInt(tdel.getText().trim());
         	if(amt > 0)
         	{
@@ -139,7 +140,11 @@ public class DepositeFrame extends JFrame
         	}
         	else
         		JOptionPane.showMessageDialog(this, "Please enter a valid amount");
-        });
+        }catch (Exception x) {
+			JOptionPane.showMessageDialog(this,"Please enter a valid amount");
+		}
+        }
+        	);
         
         
         

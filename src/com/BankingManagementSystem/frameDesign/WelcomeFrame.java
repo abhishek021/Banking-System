@@ -53,7 +53,7 @@ public class WelcomeFrame extends JFrame
         bmanager.addActionListener((e) ->
         {
        	managerLogin();
-       	
+       	//setvisibility();
          }
        );
         
@@ -72,7 +72,7 @@ public class WelcomeFrame extends JFrame
         baccountant.addActionListener((e) ->
         {
        	AccountantLogin();
-       	
+       	//setvisibility();
          }
        );
         
@@ -82,7 +82,11 @@ public class WelcomeFrame extends JFrame
         frame.setLocationByPlatform(false);
         frame.setVisible(true);
     }
-
+  /*   public void setvisibility()
+ 	{
+ 		setVisible(false);
+ 		this.dispose();
+ 	}*/
      public void AccountantLogin()
      {
 

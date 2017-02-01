@@ -6,38 +6,42 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
+
+import com.BankingManagementSystem.FileHandling.CustomerDetailsFile;
+import com.BankingManagementSystem.FileHandling.TransactionDetailsFile;
+import com.BankingManagementSystem.Pojo.CustomerDetails;
+import com.BankingManagementSystem.Pojo.TransactionSummary;
+import com.BankingManagementSystem.frameDesign.*;
 
 public class PassbookAndCheque extends JFrame
 {
 	private JPanel PassbookAndCheque;
 	private JTextField txtAccountNumber;
 	private JTextField txtCustomerName;
+	private JButton btnNewButton,btnNewBUttonPrint ;
+	int index1;
+	ArrayList<CustomerDetails> userlist = new ArrayList<CustomerDetails>();
 	
-	
+	ArrayList<TransactionSummary> transtemp = new ArrayList<TransactionSummary>();
 	public PassbookAndCheque()
 	{
-		formOpen();
-		
-	}
 	
-	
-
-	private void formOpen()
-	{
 		//ManagerLoginPage obj=new ManagerLoginPage();
 		
 		setResizable(false);
-		setTitle("PASSBOOK AND CHEQUE BOOK");
+		setTitle("");
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		/*
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         
         addWindowListener(new WindowAdapter() {
@@ -48,11 +52,11 @@ public class PassbookAndCheque extends JFrame
             	 	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             	 	setVisible(false);
             	 	dispose();
-                	new Managerframe(obj.loginIndex);
+                	//new Managerframe(index);
                 }
         }
         );
-        */
+        
         
 		setBounds(100, 100, 600, 500);
 		PassbookAndCheque = new JPanel();
@@ -63,7 +67,7 @@ public class PassbookAndCheque extends JFrame
 		setContentPane(PassbookAndCheque);
 		PassbookAndCheque.setLayout(null);
 		
-		JLabel lblPassbookAndCheque = new JLabel("PASSBOOK AND CHEQUE CONFIRMATION");
+		JLabel lblPassbookAndCheque = new JLabel("PRINTING AND ISSUEING A PASSBOOK");
 		lblPassbookAndCheque.setForeground(new Color(128, 128, 0));
 		lblPassbookAndCheque.setFont(new Font("Times New Roman", Font.BOLD, 27));
 		lblPassbookAndCheque.setBackground(new Color(245, 222, 179));
@@ -98,15 +102,79 @@ public class PassbookAndCheque extends JFrame
 		txtCustomerName.setBounds(253, 231, 313, 31);
 		PassbookAndCheque.add(txtCustomerName);
 		
-		JButton btnNewButton = new JButton("COMFIRM");
-		btnNewButton.setToolTipText("Please Confirm");
+		 btnNewButton = new JButton("DETAILS");
+		btnNewButton.setToolTipText("shows the details of customer");
 		btnNewButton.setBackground(new Color(218, 165, 32));
 		btnNewButton.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 26));
 		btnNewButton.setBounds(396, 336, 170, 55);
 		PassbookAndCheque.add(btnNewButton);
 		
-		setVisible(true);
+		btnNewButton.addActionListener((e)->
+		{
+			printDetails();
+		});
+		
+		
+
+		 btnNewBUttonPrint = new JButton("TRANSACTION");
+		 btnNewBUttonPrint.setToolTipText("print the transaction history");
+		 btnNewBUttonPrint.setBackground(new Color(218, 165, 32));
+		 btnNewBUttonPrint.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		 btnNewBUttonPrint.setFont(new Font("Times New Roman", Font.BOLD, 26));
+		 btnNewBUttonPrint.setBounds(96, 336, 170, 55);
+		PassbookAndCheque.add(btnNewBUttonPrint);
+		
+		btnNewBUttonPrint.addActionListener((e)->
+		{
+			printPassbook();
+		});
+		
+		 
+		 setVisible(true);
+	}
+	public void printDetails()
+	{
+		
+		
+		userlist = CustomerDetailsFile.readDataFromFile();
+		
+try{
+		index1=Search.searchId(txtAccountNumber.getText().trim());
+		ArrayList<CustomerDetails> userlisttemp = new ArrayList<CustomerDetails>();
+		userlisttemp.add(userlist.get(index1));
+		//JOptionPane.showMessageDialog(this, "hey");
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				try 
+				{
+					new ShowCustomerDetails(userlisttemp);
+				}
+				catch (Exception e) 
+				{
+					e.printStackTrace();
+				}
+			}
+		});
+	}catch (Exception e) {
+	JOptionPane.showMessageDialog(this,"Invalid Input");
+}
+	}
+	public void printPassbook()
+	{
+		ArrayList<TransactionSummary> trans =new  ArrayList<TransactionSummary>();
+		trans = TransactionDetailsFile.readDataFromFile();
+	
+		for(TransactionSummary re : trans)
+		{
+			if((txtAccountNumber.getText().trim()).equals(re.getAccNo()))
+			transtemp.add(re);
+				
+		}
+		new PrintPassbook(transtemp);
+	
 	}
 	
 }
@@ -116,20 +184,7 @@ public class PassbookAndCheque extends JFrame
 
 	public static void main(String[] args) 
 	{
-		EventQueue.invokeLater(new Runnable() 
-		{
-			public void run() 
-			{
-				try 
-				{
-					PassbookCheque pc = new PassbookCheque();
-				}
-				catch (Exception e) 
-				{
-					e.printStackTrace();
-				}
-			}
-		});
+		
 
 	}
 

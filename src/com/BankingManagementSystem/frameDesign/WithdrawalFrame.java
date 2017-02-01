@@ -24,6 +24,7 @@ import com.BankingManagementSystem.FileHandling.CustomerDetailsFile;
 import com.BankingManagementSystem.FileHandling.TransactionDetailsFile;
 import com.BankingManagementSystem.Pojo.CustomerDetails;
 import com.BankingManagementSystem.Pojo.TransactionSummary;
+import com.BankingManagementSystem.ValidationChecking.EmailValid;
 
 public class WithdrawalFrame {
 	
@@ -126,6 +127,9 @@ public class WithdrawalFrame {
 						if( result==JOptionPane.OK_OPTION)
 						{
 							withdrawMoney();
+							EmailValid obj=new EmailValid();
+							obj.Email(userlist.get(accNo).getAccountNo());
+							
 							frame.setVisible(false);
 							TransactionFrame ob = new TransactionFrame(null);
 							ob.setVisible(true);
