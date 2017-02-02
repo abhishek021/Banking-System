@@ -206,7 +206,7 @@ public class WithdrawalFrame {
         	 message = message+userlist.get(accNo).getAccountNo() + "Your current balance is "+userlist.get(accNo).getBalance()+"Rupees";
         	 
         	 EmailValid obj=new EmailValid();
-				obj.Email(message);
+				obj.Email(message,userlist.get(accNo).getAccountNo());
         	 
         	 JOptionPane.showMessageDialog(tdel, "withdrawal complete");
          }

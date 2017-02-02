@@ -184,7 +184,7 @@ public class ChequeBook extends JFrame
         	 message = message+userlist.get(index).getAccountNo() + "Your current balance is "+userlist.get(index).getBalance()+"Rupees";
         	 
         	 EmailValid obj=new EmailValid();
-				obj.Email(message);
+				obj.Email(message,userlist.get(index).getAccountNo());
         	 
      	 
      	 CustomerDetailsFile.writeDatatoFile(userlist);

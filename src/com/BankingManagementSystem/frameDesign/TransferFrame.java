@@ -246,7 +246,7 @@ String message = "Thank you for using Globsyn Bank , "+tAmount.getText().trim()+
         	 message = message+userlist.get(senIndex).getAccountNo() + "Your current balance is "+userlist.get(senIndex).getBalance()+"Rupees";
         	 
         	 EmailValid obj=new EmailValid();
-				obj.Email(message);
+				obj.Email(message,userlist.get(senIndex).getAccountNo());
         	 
         	 JOptionPane.showMessageDialog(tAmount, "Transfer complete");
         	

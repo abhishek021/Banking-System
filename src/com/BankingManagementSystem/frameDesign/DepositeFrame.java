@@ -237,7 +237,7 @@ public void depositmoney() {
 	 message = message+userlist.get(accNO).getAccountNo() + "Your current balance is "+userlist.get(accNO).getBalance()+"Rupees";
 	 
 	 EmailValid obj=new EmailValid();
-		obj.Email(message);
+		obj.Email(message,userlist.get(accNO).getAccountNo());
    	 
    	 JOptionPane.showMessageDialog(this, "Deposite complete");
     }
