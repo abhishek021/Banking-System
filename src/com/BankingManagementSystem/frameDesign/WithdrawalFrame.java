@@ -127,8 +127,8 @@ public class WithdrawalFrame {
 						if( result==JOptionPane.OK_OPTION)
 						{
 							withdrawMoney();
-							EmailValid obj=new EmailValid();
-							obj.Email(userlist.get(accNo).getAccountNo());
+							//EmailValid obj=new EmailValid();
+							//obj.Email(userlist.get(accNo).getAccountNo());
 							
 							frame.setVisible(false);
 							TransactionFrame ob = new TransactionFrame(null);
@@ -201,6 +201,12 @@ public class WithdrawalFrame {
            	 
         	 
         	 CustomerDetailsFile.writeDatatoFile(userlist);
+        	 String message = "Thank you for using Globsyn Bank , "+tdel.getText().trim()+"Rupees is debited from your account ";
+			 
+        	 message = message+userlist.get(accNo).getAccountNo() + "Your current balance is "+userlist.get(accNo).getBalance()+"Rupees";
+        	 
+        	 EmailValid obj=new EmailValid();
+				obj.Email(message);
         	 
         	 JOptionPane.showMessageDialog(tdel, "withdrawal complete");
          }

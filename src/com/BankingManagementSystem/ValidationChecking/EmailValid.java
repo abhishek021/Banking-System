@@ -10,14 +10,14 @@ public class EmailValid {
 	String a;
 	ArrayList<CustomerDetails> userlist = CustomerDetailsFile.readDataFromFile();	
 	
-	public void Email(String accno) 
+	public void Email(String msg) 
 	{
-		int i=Search.searchId(accno);
-		a=userlist.get(i).getCemailid();
+		//int i=Search.searchId(accno);
+		//a=userlist.get(i).getCemailid();
 		
-		String[] to={a};
+		String[] to={"itsmetarun987@gmail.com"};
 	try{	
-		if(EmailSender.sendMail("imduke021@gmail.com", "951357951357","Dear customer, Your Account no. is "+ accno,to))
+		if(EmailSender.sendMail("imduke021@gmail.com", "951357951357",msg,to))
 		{
 			System.out.println("email sent");
 		}

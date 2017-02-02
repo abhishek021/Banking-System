@@ -34,7 +34,7 @@ public class EmailSender {
 					
 			}
 			//add subject
-			mimemessage.setSubject("mail using javamail api");
+			mimemessage.setSubject("Email from Banking Management System");
 			//set message to mimemessage
 			mimemessage.setText(message);
 			Transport transport=session.getTransport("smtp");

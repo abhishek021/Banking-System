@@ -125,12 +125,8 @@ public class TransactionFrame extends JFrame{
 			try
 			{
 		
-			int a= 1; //validateAccno();
-			if(a==1)
-			{
 				new DepositeFrame(Search.searchId(accno.getText().trim()));
 				this.setVisible(false);
-			}
 			}
 			catch(Exception a)
 			{

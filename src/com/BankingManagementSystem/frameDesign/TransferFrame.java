@@ -24,17 +24,19 @@ import com.BankingManagementSystem.FileHandling.CustomerDetailsFile;
 import com.BankingManagementSystem.FileHandling.TransactionDetailsFile;
 import com.BankingManagementSystem.Pojo.CustomerDetails;
 import com.BankingManagementSystem.Pojo.TransactionSummary;
+import com.BankingManagementSystem.ValidationChecking.EmailValid;
 
 public class TransferFrame {
 	
 	JLabel labelAccNo;
 	ArrayList<CustomerDetails> userlist = CustomerDetailsFile.readDataFromFile();
-	int senIndex,recIndex;
+	private int senIndex,recIndex;
 	private JTextField tRecAcc;
 	private JTextField tAmount;
 	private  JPanel contentPane;
 	private JLabel labelName,labelAmount,lblSendersName,label_1 ,lblMoney;
 	private JButton bmanager;
+	
 	
 	
 	
@@ -145,6 +147,9 @@ public class TransferFrame {
 							{
                     	
                     		transferMoney();
+                    		//EmailValid obj=new EmailValid();
+							//obj.Email(userlist.get(senIndex).getAccountNo());
+							
                     		frame.setVisible(false);
                     		TransactionFrame ob = new TransactionFrame(null);
                     		ob.setVisible(true);
@@ -235,6 +240,13 @@ public class TransferFrame {
            	 
            	 
         	 CustomerDetailsFile.writeDatatoFile(userlist);
+        	 
+String message = "Thank you for using Globsyn Bank , "+tAmount.getText().trim()+"Rupees is debited from your account ";
+			 
+        	 message = message+userlist.get(senIndex).getAccountNo() + "Your current balance is "+userlist.get(senIndex).getBalance()+"Rupees";
+        	 
+        	 EmailValid obj=new EmailValid();
+				obj.Email(message);
         	 
         	 JOptionPane.showMessageDialog(tAmount, "Transfer complete");
         	

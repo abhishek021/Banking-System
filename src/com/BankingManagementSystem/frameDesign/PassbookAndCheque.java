@@ -103,7 +103,7 @@ public class PassbookAndCheque extends JFrame
 		PassbookAndCheque.add(txtCustomerName);
 		
 		 btnNewButton = new JButton("DETAILS");
-		btnNewButton.setToolTipText("shows the details of customer");
+		btnNewButton.setToolTipText("shows the deatails of customer");
 		btnNewButton.setBackground(new Color(218, 165, 32));
 		btnNewButton.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 26));
@@ -138,8 +138,6 @@ public class PassbookAndCheque extends JFrame
 		
 		
 		userlist = CustomerDetailsFile.readDataFromFile();
-		
-try{
 		index1=Search.searchId(txtAccountNumber.getText().trim());
 		ArrayList<CustomerDetails> userlisttemp = new ArrayList<CustomerDetails>();
 		userlisttemp.add(userlist.get(index1));
@@ -158,15 +156,12 @@ try{
 				}
 			}
 		});
-	}catch (Exception e) {
-	JOptionPane.showMessageDialog(this,"Invalid Input");
-}
+		
 	}
 	public void printPassbook()
 	{
 		ArrayList<TransactionSummary> trans =new  ArrayList<TransactionSummary>();
 		trans = TransactionDetailsFile.readDataFromFile();
-	
 		for(TransactionSummary re : trans)
 		{
 			if((txtAccountNumber.getText().trim()).equals(re.getAccNo()))
@@ -174,9 +169,7 @@ try{
 				
 		}
 		new PrintPassbook(transtemp);
-	
 	}
-	
 }
 
 /*public class PassbookAndCheque 

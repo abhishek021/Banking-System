@@ -139,8 +139,8 @@ class AllDetailsTransaction extends JFrame
 				{
 					data[r][0]=re.getAccNo();
 					data[r][1]=re.getDateAndTime();
-					data[r][3]=re.getDeposite().toString();
-					data[r][2]=re.getWithdrawal().toString();
+					data[r][2]=re.getDeposite().toString();
+					data[r][3]=re.getWithdrawal().toString();
 					
 					r++;
 				}

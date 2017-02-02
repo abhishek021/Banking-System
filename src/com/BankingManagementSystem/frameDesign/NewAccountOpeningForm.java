@@ -346,7 +346,7 @@ class AccountOpening extends JFrame
 			Csex="Female";
 		}
 		//Csex = "Male";
-	    Cfname =txtFathersName.getText().trim();
+		Cfname =txtFathersName.getText().trim();
 		Cmname = txtMothersName.getText().trim();
 		Cadd = txtAddress.getText().trim();
 		Cphone = txtPhone.getText().trim();

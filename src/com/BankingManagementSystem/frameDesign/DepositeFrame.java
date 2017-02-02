@@ -28,6 +28,7 @@ import javax.swing.border.MatteBorder;
 import javax.xml.ws.RespectBindingFeature;
 
 import com.BankingManagementSystem.Pojo.CustomerDetails;
+import com.BankingManagementSystem.ValidationChecking.EmailValid;
 
 public class DepositeFrame extends JFrame
 {
@@ -134,6 +135,9 @@ public class DepositeFrame extends JFrame
         	if(amt > 0)
         	{
         		depositmoney();
+        		//EmailValid obj=new EmailValid();
+				//obj.Email(userlist.get(accNO).getAccountNo());
+				
         		frame.setVisible(false);
         		TransactionFrame ob = new TransactionFrame(null);
         		ob.setVisible(true);
@@ -227,6 +231,13 @@ public void depositmoney() {
    	 TransactionDetailsFile.writeDatatoFile(trans);
    	 
    	 CustomerDetailsFile.writeDatatoFile(userlist);
+   	
+   	 String message = "Thank you for using Globsyn Bank , "+tdel.getText().trim()+"Rupees is credited to your account ";
+	 
+	 message = message+userlist.get(accNO).getAccountNo() + "Your current balance is "+userlist.get(accNO).getBalance()+"Rupees";
+	 
+	 EmailValid obj=new EmailValid();
+		obj.Email(message);
    	 
    	 JOptionPane.showMessageDialog(this, "Deposite complete");
     }
