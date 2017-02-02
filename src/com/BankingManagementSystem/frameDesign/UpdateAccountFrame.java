@@ -164,27 +164,32 @@ public class UpdateAccountFrame extends JFrame
 
     public void updateAccount()
     {
-    	String phone=tphn.getText().trim();
-		 isdatavalidate = phoneCheck(phone);
-    	if(isdatavalidate)
-    	{
-    		int idfoundpos = Search.searchId(taccno.getText().trim());
+    	try{
+    				int idfoundpos = Search.searchId(taccno.getText().trim());
 
-    		if(idfoundpos >= 0)
-    		{
-    			ArrayList<CustomerDetails> userlist = CustomerDetailsFile.readDataFromFile();
-    			userlist.get(idfoundpos).setCaddress(tadd.getText().trim());
-    			userlist.get(idfoundpos).setCphone(tphn.getText().trim());
+    				if(idfoundpos >= 0)
+    				{
+    					String phone=tphn.getText().trim();
+    		    		isdatavalidate = phoneCheck(phone);
+    		    		if(isdatavalidate)
+    		    			{
+    					ArrayList<CustomerDetails> userlist = CustomerDetailsFile.readDataFromFile();
+    					userlist.get(idfoundpos).setCaddress(tadd.getText().trim());
+    					userlist.get(idfoundpos).setCphone(tphn.getText().trim());
        	 
-    			CustomerDetailsFile.writeDatatoFile(userlist);
-    			JOptionPane.showMessageDialog(this, "Account updation successfull");
+    					CustomerDetailsFile.writeDatatoFile(userlist);
+    					JOptionPane.showMessageDialog(this, "Account updation successfull");
+    		    			}
        	 
-    		}
-        else
-        	{
-        	JOptionPane.showMessageDialog(this, "Invalid Account number");
-        	}
-    	}
+    				}
+    				else
+    				{
+    					JOptionPane.showMessageDialog(this, "Invalid Account number");
+    				}
+    			
+    	}catch (Exception e) {
+			JOptionPane.showMessageDialog(this, "Invalid input data");
+		}
    
     }
     public boolean phoneCheck(String Phone)

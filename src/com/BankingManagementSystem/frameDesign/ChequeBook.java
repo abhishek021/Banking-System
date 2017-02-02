@@ -158,15 +158,17 @@ public class ChequeBook extends JFrame
 	}
 	public void issue()
 	{
-
-		int index = Search.searchId(txtAccountNumber.getText().trim());
-		ArrayList<CustomerDetails> userlist =new ArrayList<CustomerDetails>();
-		userlist = CustomerDetailsFile.readDataFromFile();
-		userlist.get(index).setBalance(userlist.get(index).getBalance() - Double.parseDouble(noOfPages)*2.50 );
-		 TransactionSummary ts = new TransactionSummary();
-		 ts.setAccNo(userlist.get(index).getAccountNo());
+		
+	  int index = Search.searchId(txtAccountNumber.getText().trim());
+	  if(index >= 0)
+	  {
+		  ArrayList<CustomerDetails> userlist =new ArrayList<CustomerDetails>();
+		  userlist = CustomerDetailsFile.readDataFromFile();
+		  userlist.get(index).setBalance(userlist.get(index).getBalance() - Double.parseDouble(noOfPages)*2.50 );
+		  TransactionSummary ts = new TransactionSummary();
+		  ts.setAccNo(userlist.get(index).getAccountNo());
         	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-     	 LocalDateTime now = LocalDateTime.now();
+     	    LocalDateTime now = LocalDateTime.now();
         	 ts.setDateAndTime(dtf.format(now));
         	 ts.setWithdrawal(Double.parseDouble(noOfPages)*2.50 );
         	 ts.setDeposite(0.0);
@@ -179,7 +181,7 @@ public class ChequeBook extends JFrame
         	 
         	 TransactionDetailsFile.writeDatatoFile(trans);
         	 
- String message = "Thank you for using Globsyn Bank , "+(Double.parseDouble(noOfPages)*2.50 )+"Rupees is debited from your account ";
+             String message = "Thank you for using Globsyn Bank , "+(Double.parseDouble(noOfPages)*2.50 )+"Rupees is debited from your account ";
 			 
         	 message = message+userlist.get(index).getAccountNo() + "Your current balance is "+userlist.get(index).getBalance()+"Rupees";
         	 
@@ -188,6 +190,9 @@ public class ChequeBook extends JFrame
         	 
      	 
      	 CustomerDetailsFile.writeDatatoFile(userlist);
+	  }
+	  else
+		  JOptionPane.showMessageDialog(this,"Invalid Account number");
 	}
 	/* public void withdrawMoney() {
 		 if(accNo >= 0)

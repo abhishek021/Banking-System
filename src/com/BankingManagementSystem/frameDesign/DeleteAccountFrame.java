@@ -95,20 +95,29 @@ public class DeleteAccountFrame extends JFrame
 
     public void deleteAccount()
     {
-    	//System.out.println();
-    	int idfoundpos = Search.searchId(tdel.getText().trim());
+    	
+    	try{
+    			int idfoundpos = Search.searchId(tdel.getText().trim());
 
-    	 if(idfoundpos >= 0)
-         {
-        	 ArrayList<CustomerDetails> userlist = CustomerDetailsFile.readDataFromFile();
-        	 userlist.remove(idfoundpos);
-        	 CustomerDetailsFile.writeDatatoFile(userlist);
-        	 JOptionPane.showMessageDialog(this, "Account deletion successfull");
-         }
-         else
-         {
-            JOptionPane.showMessageDialog(this, "Invalid Account number");
-         }
+    			if(idfoundpos >= 0)
+    			{
+    				int result = JOptionPane.showConfirmDialog(
+    						null, "Are you sure?");
+    				if( result==JOptionPane.OK_OPTION)
+    				{
+    				ArrayList<CustomerDetails> userlist = CustomerDetailsFile.readDataFromFile();
+    				userlist.remove(idfoundpos);
+    				CustomerDetailsFile.writeDatatoFile(userlist);
+    				JOptionPane.showMessageDialog(this, "Account deletion successfull");
+    				}
+    			}
+    			else
+    				{
+    					JOptionPane.showMessageDialog(this, "Invalid Account number");
+    				}
+    	}catch (Exception e) {
+			JOptionPane.showInternalConfirmDialog(this,"Invalid Input");
+		}
     	
     }
     public static void main(String... args)

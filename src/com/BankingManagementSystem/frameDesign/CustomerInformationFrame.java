@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
@@ -102,10 +103,14 @@ public class CustomerInformationFrame extends JFrame
 		
 		btnNewButton.addActionListener((e)->
 		{
-			int index = Search.searchId(textField.getText().trim());
-			userlisttemp.add(userlist.get(index));
+			try{
+				int index = Search.searchId(textField.getText().trim());
+				userlisttemp.add(userlist.get(index));
 			
-			new ShowCustomerDetails(userlisttemp);
+				new ShowCustomerDetails(userlisttemp);
+			}catch (Exception x) {
+				JOptionPane.showMessageDialog(this,"Invalid input data");
+			}
 		});
 		
 		

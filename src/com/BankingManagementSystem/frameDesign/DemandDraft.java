@@ -165,38 +165,40 @@ public class DemandDraft extends JFrame
 	}
 	public void issue()
 	{
-		try{
-	
+		
 		int index = Search.searchId(txtAccountNumber.getText().trim());
-		ArrayList<CustomerDetails> userlist =new ArrayList<CustomerDetails>();
-		userlist = CustomerDetailsFile.readDataFromFile();
-		userlist.get(index).setBalance(userlist.get(index).getBalance() - Double.parseDouble(txtAmount.getText().trim())-25.00 );
-		 TransactionSummary ts = new TransactionSummary();
-		 ts.setAccNo(userlist.get(index).getAccountNo());
-        	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-     	 LocalDateTime now = LocalDateTime.now();
-        	 ts.setDateAndTime(dtf.format(now));
-        	 ts.setWithdrawal(Double.parseDouble(txtAmount.getText().trim())+25.00 );
-        	 ts.setDeposite(0.0);
-        	 JOptionPane.showMessageDialog(this, "Demand draft of amount "+txtAmount.getText().trim()+ " is issued");
-        	 
-        	 ArrayList<TransactionSummary> trans = new ArrayList<TransactionSummary>();
-        	 
-        	 trans =  TransactionDetailsFile.readDataFromFile();
-        	 trans.add(ts);
-        	 
-        	 TransactionDetailsFile.writeDatatoFile(trans);
-        	 
- String message = "Thank you for using Globsyn Bank , "+txtAmount.getText().trim()+"Rupees is debited from your account ";
-			 
-        	 message = message+userlist.get(index).getAccountNo() + "Your current balance is "+userlist.get(index).getBalance()+"Rupees";
-        	 
-        	 EmailValid obj=new EmailValid();
-				obj.Email(message,userlist.get(index).getAccountNo());
-     	 
-     	 CustomerDetailsFile.writeDatatoFile(userlist);
-		}catch (Exception e) {
-			JOptionPane.showMessageDialog(this,"Invalid Input");
+		if(index >=0)
+		{
+			ArrayList<CustomerDetails> userlist =new ArrayList<CustomerDetails>();
+			userlist = CustomerDetailsFile.readDataFromFile();
+			userlist.get(index).setBalance(userlist.get(index).getBalance() - Double.parseDouble(txtAmount.getText().trim())-25.00 );
+			 TransactionSummary ts = new TransactionSummary();
+			 ts.setAccNo(userlist.get(index).getAccountNo());
+	        	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+	     	 LocalDateTime now = LocalDateTime.now();
+	        	 ts.setDateAndTime(dtf.format(now));
+	        	 ts.setWithdrawal(Double.parseDouble(txtAmount.getText().trim())+25.00 );
+	        	 ts.setDeposite(0.0);
+	        	 JOptionPane.showMessageDialog(this, "Demand draft of amount "+txtAmount.getText().trim()+ " is issued");
+	        	 
+	        	 ArrayList<TransactionSummary> trans = new ArrayList<TransactionSummary>();
+	        	 
+	        	 trans =  TransactionDetailsFile.readDataFromFile();
+	        	 trans.add(ts);
+	        	 
+	        	 TransactionDetailsFile.writeDatatoFile(trans);
+	        	 
+	        	 String message = "Thank you for using Globsyn Bank , "+txtAmount.getText().trim()+" Rupees is debited from your account ";
+				 
+	        	 message = message+userlist.get(index).getAccountNo() + " Your current balance is "+userlist.get(index).getBalance()+"Rupees";
+	        	 
+	        	 EmailValid obj=new EmailValid();
+					obj.Email(message,userlist.get(index).getAccountNo());
+	     	 
+	     	 CustomerDetailsFile.writeDatatoFile(userlist);
 		}
+		else
+			JOptionPane.showMessageDialog(this,"Invalid Account number");
+		
 	}
 }

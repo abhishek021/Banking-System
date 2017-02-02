@@ -135,7 +135,7 @@ public class PassbookAndCheque extends JFrame
 	}
 	public void printDetails()
 	{
-		
+		try{
 		
 		userlist = CustomerDetailsFile.readDataFromFile();
 		index1=Search.searchId(txtAccountNumber.getText().trim());
@@ -156,10 +156,14 @@ public class PassbookAndCheque extends JFrame
 				}
 			}
 		});
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(this,"Invalid Account number");
+		}
 		
 	}
 	public void printPassbook()
 	{
+		
 		ArrayList<TransactionSummary> trans =new  ArrayList<TransactionSummary>();
 		trans = TransactionDetailsFile.readDataFromFile();
 		for(TransactionSummary re : trans)
@@ -169,6 +173,7 @@ public class PassbookAndCheque extends JFrame
 				
 		}
 		new PrintPassbook(transtemp);
+		
 	}
 }
 

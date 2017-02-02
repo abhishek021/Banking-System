@@ -109,9 +109,10 @@ public class AccountantInformationFrame extends JFrame
 		
 		btnNewButton.addActionListener((e)->
 		{
-			int index = searchId(textField.getText().trim());
+		 try{	
+			 int index = searchId(textField.getText().trim());
 			 accttemp = new ArrayList<AccountantDetails>();
-			accttemp.add(acct.get(index));
+			 accttemp.add(acct.get(index));
 
 			SwingUtilities.invokeLater(new Runnable()
             {
@@ -121,6 +122,9 @@ public class AccountantInformationFrame extends JFrame
           
                 }
             });
+		 }catch (Exception x) {
+			JOptionPane.showMessageDialog(this,"Invalid Input..");
+		}
 			
 		});
 		

@@ -70,7 +70,7 @@ public class Managerframe extends JFrame
        
         ManagerDetails managerDetails = new ManagerDetails();
        
-        label = new JLabel(managerlist.get(index).getManagerName(), JLabel.CENTER);
+        label = new JLabel(managerlist.get(index).getManagerName().toUpperCase(), JLabel.CENTER);
         label.setToolTipText("Manager's Name");
         Font f1=new Font("comic sans ms",Font.BOLD,48);
         label.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
@@ -177,10 +177,10 @@ public class Managerframe extends JFrame
         	accountantInfo();
         });
 
-        lblManagerName = new JLabel("Manager Name", SwingConstants.CENTER);
+        lblManagerName = new JLabel("HELLO MR.", SwingConstants.CENTER);
         lblManagerName.setForeground(Color.RED);
         lblManagerName.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
-        lblManagerName.setBounds(10, 110, 246, 43);
+        lblManagerName.setBounds(70, 110, 246, 43);
         contentPane.add(lblManagerName);
         
         lblNewLabel = new JLabel("MANAGER PANEL");
