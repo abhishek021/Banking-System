@@ -1,21 +1,19 @@
 package com.BankingManagementSystem.frameDesign;
 
 
-import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.BankingManagementSystem.FileHandling.AccountantDetailsFile;
-import com.BankingManagementSystem.FileHandling.CustomerDetailsFile;
-import com.BankingManagementSystem.FileHandling.ManagerDetailsFile;
+
 import com.BankingManagementSystem.Pojo.AccountantDetails;
-import com.BankingManagementSystem.Pojo.CustomerDetails;
-import com.BankingManagementSystem.Pojo.ManagerDetails;
+
 
 import javax.swing.UIManager;
-import java.awt.Toolkit;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -27,6 +25,8 @@ import java.awt.Font;
 import java.awt.Color;
 
 import java.awt.Panel;
+import java.awt.Toolkit;
+
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.border.BevelBorder;
@@ -48,6 +48,8 @@ class LoginAccountant extends JFrame
 	private JCheckBox chckbxShowPassword;
 	private JLabel lblLogIn;
 	private JLabel lblAccountant;
+	
+	int loginIndex;
 	
 	public LoginAccountant() 
 	{
@@ -73,6 +75,7 @@ class LoginAccountant extends JFrame
 		
 		//setIconImage(Toolkit.getDefaultToolkit().getImage(AdminLoginPage.class.getResource("/resources/1485472416_Banking_00019_A.png")));
 		setTitle("ACCOUNTANT LOGIN");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(start.class.getResource("/resources/operator.png")));
 		addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
             	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -186,12 +189,15 @@ class LoginAccountant extends JFrame
 	public void loginCheck()
 	{
 		
-		int loginIndex = searchId(textUserId.getText().trim());
+		loginIndex = searchId(textUserId.getText().trim());
+		
+		
 		
         if(loginIndex >= 0)
         {
         	
        	 ArrayList<AccountantDetails> userlist = AccountantDetailsFile.readDataFromFile();
+       	 
        	 if((txtPassword.getText().trim()).equals(userlist.get(loginIndex).getAccountantPassword()))
        	 {
        		
@@ -199,7 +205,7 @@ class LoginAccountant extends JFrame
              {
                  public void run()
                  {
-                     new AccountantFrame();
+                     new AccountantFrame(loginIndex);
                      setvisible();
                  }
              });
@@ -214,7 +220,7 @@ class LoginAccountant extends JFrame
 	}
 	public void setvisible()
 	{
-		this.setVisible(false);
+		this.dispose();
 	}
 	public int searchId(String strId)
 	{

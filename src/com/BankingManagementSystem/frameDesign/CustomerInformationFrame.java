@@ -3,6 +3,7 @@ package com.BankingManagementSystem.frameDesign;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class CustomerInformationFrame extends JFrame
 	        );
 		
 		setBounds(100, 100, 598, 457);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(start.class.getResource("/resources/specialist-user.png")));
 		contentPane = new JPanel();
 		contentPane.setFont(new Font("Lucida Handwriting", Font.BOLD, 16));
 		contentPane.setForeground(new Color(0, 0, 0));

@@ -5,6 +5,7 @@ import com.BankingManagementSystem.FileHandling.*;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -61,6 +62,7 @@ public class DepositeFrame extends JFrame
         
        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage(start.class.getResource("/resources/safe-deposit-box.png")));
         
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -222,7 +224,7 @@ public void depositmoney() {
    	 ts.setDateAndTime(dtf.format(now));
    	 ts.setDeposite(Double.parseDouble(tdel.getText().trim()));
    	 ts.setWithdrawal(0.0);
-   	 
+   	ts.setBalance(userlist.get(accNO).getBalance());
    	 ArrayList<TransactionSummary> trans = new ArrayList<TransactionSummary>();
    	 
    	 trans =  TransactionDetailsFile.readDataFromFile();
@@ -232,9 +234,9 @@ public void depositmoney() {
    	 
    	 CustomerDetailsFile.writeDatatoFile(userlist);
    	
-   	 String message = "Thank you for using Globsyn Bank , "+tdel.getText().trim()+"Rupees is credited to your account ";
+   	 String message = "Thank you for using Bank India International , \n"+tdel.getText().trim()+" Rupees is credited to your account \n";
 	 
-	 message = message+userlist.get(accNO).getAccountNo() + "Your current balance is "+userlist.get(accNO).getBalance()+"Rupees";
+	 message = message+userlist.get(accNO).getAccountNo() + " Your current balance is "+userlist.get(accNO).getBalance()+" Rupees";
 	 
 	 EmailValid obj=new EmailValid();
 		obj.Email(message,userlist.get(accNO).getAccountNo());

@@ -2,6 +2,7 @@ package com.BankingManagementSystem.frameDesign;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class DeleteAccountFrame extends JFrame
     {
         JFrame frmDeleteAccount = new JFrame("Delete an account...");
         frmDeleteAccount.setTitle("DELETE ACCOUNT");
+        frmDeleteAccount.setIconImage(Toolkit.getDefaultToolkit().getImage(start.class.getResource("/resources/delete.png")));
         
         //frmDeleteAccount.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frmDeleteAccount.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -120,8 +122,8 @@ public class DeleteAccountFrame extends JFrame
 		}
     	
     }
-    public static void main(String... args)
+   /* public static void main(String... args)
     {
               new DeleteAccountFrame();
-    }
+    }*/
 }

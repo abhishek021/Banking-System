@@ -17,7 +17,8 @@ public class EmailValid {
 		
 		String[] to={a};
 	try{	
-		if(EmailSender.sendMail("imduke021@gmail.com", "951357951357",msg,to))
+		if(EmailSender.sendMail("email", "password",msg,to))
+			//enter a valid email and password
 		{
 			System.out.println("email sent");
 		}

@@ -7,6 +7,7 @@ import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -59,7 +60,8 @@ public class TransactionFrame extends JFrame{
                 }
         }
         );
-		setVisible(true);	
+		setVisible(true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ManagerLoginPage.class.getResource("/resources/icon.png")));
 		
 		//String AccNo = "Acc1209";
 		l1=new JLabel("Account Number : ");
@@ -178,7 +180,7 @@ public class TransactionFrame extends JFrame{
 		
 	}
 	
-	public static void main(String[] args) 
+	/*public static void main(String[] args) 
     {
 		SwingUtilities.invokeLater(new Runnable()
         {
@@ -188,7 +190,7 @@ public class TransactionFrame extends JFrame{
             }
         });
 		
-    }
+    }*/
 	
 }
 
